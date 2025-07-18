@@ -1,0 +1,131 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+  <!-- Main Container -->
+  <div
+    class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md animate__animated animate__fadeIn animate__faster transition-all duration-300 hover:shadow-2xl"
+  >
+    <!-- Logo/Header with Graduation Icon -->
+    <div class="flex justify-center mb-6 animate__animated animate__bounceIn animate__delay-1s">
+      <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 3L1 9l11 6 9-4.91v5.34c0 .3-.17.58-.44.72l-6.56 3.28a1.25 1.25 0 01-1.22 0l-6.56-3.28A.82.82 0 015 17.43v-5.5l7 3.82 9-5.32L12 3z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="animate__animated animate__fadeInDown animate__delay-1s">
+      <h2 class="text-3xl font-bold mb-2 text-center text-gray-800">Welcome Back 👋</h2>
+      <p class="text-gray-500 text-center mb-6 text-sm">Sign in to your Learnify account</p>
+    </div>
+
+    <!-- Form -->
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="submitloginForm()"
+      class="space-y-5 animate__animated animate__fadeInUp animate__delay-2s"
+    >
+      <!-- Email -->
+      <div class="animate__animated animate__fadeInLeft animate__delay-2s">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+          <input
+            type="email"
+            formControlName="email"
+            autocomplete="username"
+            placeholder="you@example.com"
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+          />
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="animate__animated animate__fadeInRight animate__delay-2s">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+              />
+            </svg>
+          </div>
+          <input
+            type="password"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+          />
+        </div>
+        
+      </div>
+
+      <!-- Error Message -->
+      @if (errorMessage) {
+        <div class="p-3 bg-red-50 text-red-600 text-sm rounded-lg flex items-center animate__animated animate__shakeX">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Submit Button -->
+      <button
+        [disabled]="isLoading"
+        [class.cursor-not-allowed]="isLoading"
+        type="submit"
+        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-medium hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg flex justify-center items-center hover:animate__animated hover:animate__pulse"
+      >
+        @if (isLoading) {
+          <svg
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+        }
+        {{ isLoading ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+
+    <!-- Sign up -->
+    <div class="mt-6 text-center animate__animated animate__fadeIn animate__delay-3s">
+      <p class="text-gray-600 text-sm">
+        Don't have an account?
+        <a
+          routerLink="/register"
+          class="text-blue-600 hover:text-blue-800 font-medium hover:animate__animated hover:animate__rubberBand"
+        >
+          Sign up
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
