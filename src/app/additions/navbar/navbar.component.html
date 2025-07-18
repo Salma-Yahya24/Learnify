@@ -1,0 +1,23 @@
+<nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center sticky top-0 left-0 right-0">
+  <div class="text-2xl font-bold text-blue-600">
+    <a routerLink="/">Learnify</a>
+  </div>
+
+  <div class="flex items-center gap-6">
+    <a routerLink="/home" class="text-gray-700 hover:text-blue-600 transition">Home</a>
+@if (!isLoggedIn) {
+
+    <a routerLink="/login" class="text-gray-700 hover:text-blue-600 transition">Login</a>
+    <a routerLink="/register" class="text-gray-700 hover:text-blue-600 transition">Register</a>
+}
+    
+@else if (isLoggedIn) {
+
+    <span class="text-gray-600">👤 {{ userName }}</span>
+    <button (click)="logout()" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
+      Logout
+    </button>
+}
+
+  </div>
+</nav>
