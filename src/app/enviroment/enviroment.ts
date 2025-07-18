@@ -1,3 +1,3 @@
 export enum enviroment {
-  baseUrl = 'http://learnify02-001-site1.jtempurl.com',
+  baseUrl = 'https://learnify-api.fly.dev/api/',
 }

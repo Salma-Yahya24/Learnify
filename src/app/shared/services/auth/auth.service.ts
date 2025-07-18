@@ -49,7 +49,7 @@ export class AuthService {
 
   login(data: LoginRequest): Observable<LoginSuccessResponse> {
     return this._HttpClient.post<LoginSuccessResponse>(
-      `${enviroment.baseUrl}/api/auth/login`,
+      `${enviroment.baseUrl}auth/login`,
       data
     ).pipe(
       tap((response) => {
