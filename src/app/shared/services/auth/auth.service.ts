@@ -8,6 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { LoginRequest, LoginSuccessResponse } from '../../interfaces/login';
 import { DecodedToken } from '../../interfaces/decoded-token';
 import { enviroment } from '../../../enviroment/enviroment';
+import { RegisterRequest, RegisterResponse } from '../../interfaces/register';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -66,6 +67,25 @@ export class AuthService {
         throw error;
       })
     );
+  }
+
+
+  register(data: RegisterRequest): Observable<RegisterResponse>{
+    const formData = new FormData();
+    formData.append('userName', data.userName);
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+    formData.append('telephoneNumber', data.telephoneNumber || '');
+    formData.append('dateOfBirth', data.dateOfBirth || '');
+    formData.append('genderName', data.genderName);
+    formData.append('roleName', data.roleName);
+    if(data.profileImage){
+      formData.append('profileImage', data.profileImage);
+    }
+    return this._HttpClient.post<RegisterResponse>(
+      `${enviroment.baseUrl}auth/register`,
+      formData
+    )
   }
 
   logOut() {
